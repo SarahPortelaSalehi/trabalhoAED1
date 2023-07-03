@@ -120,6 +120,11 @@ char* Unir(char* A, char* B, char op) {
     sprintf(resultado, "%s %c %s", A, op, B);
     return resultado;
 }
+char* Unir2(char* A, char* B, char op) {
+    char* resultado = (char*) malloc(strlen(A) + 2 + strlen(B));
+    sprintf(resultado, "%s %s %c", A, B, op);
+    return resultado;
+}
 
 void exibir(pilha* A) {
     No* i = A->topo;
@@ -314,8 +319,9 @@ char* infixToPostfix(char* expression) {
 }
 char* prefixToPostfix(char exp[]) {
     char* pt;
-    pilha a;
+    pilha a,b;
     inicializar(&a);
+    inicializar(&b);
     int tamanho = strlen(exp);
 
     for (int i = tamanho - 1; i >= 0; i--) {
@@ -327,7 +333,7 @@ char* prefixToPostfix(char exp[]) {
             No* n2 = desempilhar(&a);
 
             char t[2] = {exp[i], '\0'};
-            char* resultado = Unir(n1->string, n2->string, t[0]);
+            char* resultado = Unir2(n1->string, n2->string, t[0]);
             empilhar1(&a, resultado);
 
             free(n1);
@@ -348,7 +354,7 @@ char* prefixToInfix(char* expression) {
     char* res;
 
     pt = strtok(expression, " ");
-    while (pt) {
+    while (pt){
         if (pt[0] == '+' || pt[0] == '-' || pt[0] == '*' || pt[0] == '/') {
             No* n1 = desempilhar(&a);
             No* n2 = desempilhar(&a);

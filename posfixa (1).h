@@ -29,6 +29,7 @@ char* infixToPostfix(char* expression);
 char* prefixToInfix(char* expression);
 char* prefixToPostfix(char* expression);
 char* Unir1(char op, char* A, char* B);
+char* Unir2(char* A, char* B, char op); 
 void apagar_expressao(char* expressao);
 #endif
 
